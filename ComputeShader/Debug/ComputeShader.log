@@ -1,0 +1,6 @@
+﻿  main.cpp
+D:\projets\artfx\TD4\ComputeShader\ComputeShader\main.cpp(81,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\projets\artfx\TD4\ComputeShader\ComputeShader\main.cpp(106,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\projets\artfx\TD4\ComputeShader\ComputeShader\main.cpp(135,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\projets\artfx\TD4\ComputeShader\ComputeShader\main.cpp(136,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  ComputeShader.vcxproj -> D:\projets\artfx\TD4\ComputeShader\Debug\ComputeShader.exe

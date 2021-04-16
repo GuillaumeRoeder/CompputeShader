@@ -1,0 +1,81 @@
+#include<iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+
+
+#include <glew.h>
+#include <glfw3.h>
+
+
+static std::string Parse(const std::string& filepath) {
+
+    std::ifstream stream(filepath);
+
+
+    std::string line;
+    std::stringstream ss;
+
+
+    while (std::getline(stream, line))
+    {
+        ss << line << '\n';
+    };
+    
+
+    return { ss.str() };
+
+}
+
+
+static unsigned int CompileShader( GLuint type, const std::string& source) {
+
+    GLuint id = glCreateShader(type);
+    const char* src = &source[0];
+    glShaderSource(id, 1, &src, NULL);
+    glCompileShader(id);
+
+    int result;
+    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+
+    if(result == GL_FALSE){
+        int length;
+        glGetShaderiv(id, GL_COMPILE_STATUS, &length);
+        char* message = (char*)alloca(length*sizeof(char));
+        glGetShaderInfoLog(id, length, &length, message);
+        std::cout << "fail to compile : " << message << std::endl;
+
+        glDeleteShader(id);
+        return 0;
+    }
+
+
+    return id;
+}
+
+static int CreatShader(const std::string& vertexShader, const std::string& fragmentShader ) {
+
+    GLuint program = glCreateProgram();
+    GLuint vs = CompileShader(GL_VERTEX_SHADER,vertexShader);
+    GLuint fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+
+    
+
+    glAttachShader(program, vs);
+
+
+    glLinkProgram(program);
+    glValidateProgram(program);
+
+
+
+
+
+    glDeleteShader(vs);
+
+
+
+    return program;
+
+}
+
